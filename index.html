@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <button type="button" onclick="fetchClientPhoto()">Open Photo</button>
+    </div>
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="hvxqddfpv6a6m61"></script>
+    <script type="text/javascript">
+        
+        saverOptions = {
+            files: [
+                {'url': '', 'filename': ''},
+            ],
+
+            // Success is called once all files have been successfully added to the user's
+            // Dropbox, although they may not have synced to the user's devices yet.
+            success: function () {
+                // Indicate to the user that the files have been saved.
+                alert("Success! Files saved to your Dropbox.");
+            },
+
+            // Progress is called periodically to update the application on the progress
+            // of the user's downloads. The value passed to this callback is a float
+            // between 0 and 1. The progress callback is guaranteed to be called at least
+            // once with the value 1.
+            progress: function (progress) {},
+
+            // Cancel is called if the user presses the Cancel button or closes the Saver.
+            cancel: function () {},
+
+            // Error is called in the event of an unexpected response from the server
+            // hosting the files, such as not being able to find a file. This callback is
+            // also called if there is an error on Dropbox or if the user is over quota.
+            error: function (errorMessage) {}
+        };
+
+        const stall = async (stallTime)=> {
+            await new Promise(resolve => setTimeout(resolve, stallTime));
+        }
+
+        const fetchClientPhoto = async () => {
+            await stall(500);
+            const data = await fetch('https://dog.ceo/api/breeds/image/random')
+                .then(response => response.json())
+                .then(data => {
+                    alert('fetched photos!')
+                    console.log('data:', data);
+
+                    const img = document.createElement('img');
+                    img.src = data.message;
+
+                    document.getElementById("container").appendChild(img);
+                    const saverButton = Dropbox.createSaveButton(data.message);
+                    document.getElementById("container").appendChild(saverButton);
+                }) 
+
+        };
+
+        /** Chooser Code */ 
+
+        // chooserOptions = {
+
+        // // Required. Called when a user selects an item in the Chooser.
+        // success: function(files) {
+        //     console.log('files:', files);
+        //     alert("Here's the file link: " + files[0].link)
+        // },
+
+        // // Optional. Called when the user closes the dialog without selecting a file
+        // // and does not include any parameters.
+        // cancel: function() {},
+
+        // // Optional. "preview" (default) is a preview link to the document for sharing,
+        // // "direct" is an expiring link to download the contents of the file. For more
+        // // information about link types, see Link types below.
+        // linkType: "preview", // or "direct"
+
+        // // Optional. A value of false (default) limits selection to a single file, while
+        // // true enables multiple file selection.
+        // multiselect: false, // or true
+
+        // // Optional. This is a list of file extensions. If specified, the user will
+        // // only be able to select files with these extensions. You may also specify
+        // // file types, such as "video" or "images" in the list. For more information,
+        // // see File types below. By default, all extensions are allowed.
+        // //  extensions: ['.pdf', '.doc', '.docx'],
+
+        // // Optional. A value of false (default) limits selection to files,
+        // // while true allows the user to select both folders and files.
+        // // You cannot specify `linkType: "direct"` when using `folderselect: true`.
+        // folderselect: false, // or true
+
+        // // Optional. A limit on the size of each file that may be selected, in bytes.
+        // // If specified, the user will only be able to select files with size
+        // // less than or equal to this limit.
+        // // For the purposes of this option, folders have size zero.
+        // // sizeLimit: 1024, // or any positive number
+        // };
+
+        // // var button = Dropbox.createChooseButton(chooserOptions);
+        // // document.getElementById("container").appendChild(button);
+
+
+
+      </script>
+
+</body>
+</html>
