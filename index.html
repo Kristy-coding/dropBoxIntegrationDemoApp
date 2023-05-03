@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 30%;
+            gap: 15px;
+        }
+    </style>
 </head>
 <body>
-    <div id="container">
-        <button type="button" onclick="fetchClientPhoto()">Open Photo</button>
+    <div id="container" class="container">
+        <button type="button" onclick="fetchClientPhoto()">Generate Photo</button>
     </div>
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="hvxqddfpv6a6m61"></script>
     <script type="text/javascript">
@@ -44,6 +52,20 @@
             await new Promise(resolve => setTimeout(resolve, stallTime));
         }
 
+        // const replaceSaverButton = (elementId, newContent)=> {
+        //     const element = document.getElementById(elementId);
+        //     if (element) {
+        //         // if the element exists, replace its content
+        //         element.innerHTML = newContent;
+        //     } else {
+        //         // if the element does not exist, create a new element and append it to the page
+        //         var newElement = document.createElement("div");
+        //         newElement.setAttribute("id", elementId);
+        //         newElement.innerHTML = newContent;
+        //         document.body.appendChild(newElement);
+        //     }
+        // }
+
         const fetchClientPhoto = async () => {
             await stall(500);
             const data = await fetch('https://dog.ceo/api/breeds/image/random')
@@ -54,6 +76,10 @@
 
                     const img = document.createElement('img');
                     img.src = data.message;
+
+                    // const dogImage = document.getElementById('dog-img');
+
+                    // dogImage.innerHTML = `<img src="${data.message}"/>`;
 
                     document.getElementById("container").appendChild(img);
                     const saverButton = Dropbox.createSaveButton(data.message);
