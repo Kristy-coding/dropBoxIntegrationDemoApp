@@ -53,6 +53,13 @@
     <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="hvxqddfpv6a6m61"></script>
     <script type="text/javascript">
 
+        // import { Dropbox } from 'dropbox';
+        // const Dropbox = require('dropbox').Dropbox;
+        // const dbx = new Dropbox({
+        //     accessToken: 'sl.BdvirCMatH1ynxwA-YB3nQapbvJdpnEv3yaX5yGVCaPETP8nlinwtbqNGykeavQJpa24cmcUJncsPhs-5vF7wcLT6lv9SjL0ljumZ6nzb5j_Cw_MGkO2x6T3YmXRbDHXqw_URwM',
+        //     fetch
+        // });
+
          const img = document.createElement('img');
          img.classList.add('image-style');
          const icon = document.createElement("i");
@@ -130,79 +137,86 @@
 
         /** Chooser Code */ 
 
-        chooserOptions = {
+        // chooserOptions = {
 
-        /** Required. Called when a user selects an item in the Chooser. */
-        success: function(files) {
-            console.log('files:', files);
-            alert("Here's the file link: " + files[0].link)
-        },
+        // /** Required. Called when a user selects an item in the Chooser. */
+        // success: function(files) {
+        //     console.log('files:', files);
+        //     alert("Here's the file link: " + files[0].link)
+        // },
 
-        /** Optional. Called when the user closes the dialog without selecting a file
-        and does not include any parameters. */
-        cancel: function() {},
+        // /** Optional. Called when the user closes the dialog without selecting a file
+        // and does not include any parameters. */
+        // cancel: function() {},
 
-        /** Optional. "preview" (default) is a preview link to the document for sharing,
-        "direct" is an expiring link to download the contents of the file. For more
-        information about link types, see Link types below. */
-        linkType: "preview", // or "direct"
+        // /** Optional. "preview" (default) is a preview link to the document for sharing,
+        // "direct" is an expiring link to download the contents of the file. For more
+        // information about link types, see Link types below. */
+        // linkType: "preview", // or "direct"
 
-        /** Optional. A value of false (default) limits selection to a single file, while
-        true enables multiple file selection. */
-        multiselect: false, // or true
+        // /** Optional. A value of false (default) limits selection to a single file, while
+        // true enables multiple file selection. */
+        // multiselect: false, // or true
 
-        /** Optional. This is a list of file extensions. If specified, the user will
-        only be able to select files with these extensions. You may also specify
-        file types, such as "video" or "images" in the list. For more information,
-        see File types below. By default, all extensions are allowed.
-        extensions: ['.pdf', '.doc', '.docx'], */
+        // /** Optional. This is a list of file extensions. If specified, the user will
+        // only be able to select files with these extensions. You may also specify
+        // file types, such as "video" or "images" in the list. For more information,
+        // see File types below. By default, all extensions are allowed.
+        // extensions: ['.pdf', '.doc', '.docx'], */
 
-        /** Optional. A value of false (default) limits selection to files,
-        while true allows the user to select both folders and files.
-        You cannot specify `linkType: "direct"` when using `folderselect: true`. */
-        folderselect: false, // or true
+        // /** Optional. A value of false (default) limits selection to files,
+        // while true allows the user to select both folders and files.
+        // You cannot specify `linkType: "direct"` when using `folderselect: true`. */
+        // folderselect: false, // or true
 
-        /** Optional. A limit on the size of each file that may be selected, in bytes.
-        If specified, the user will only be able to select files with size
-        less than or equal to this limit.
-        For the purposes of this option, folders have size zero. */
-        // sizeLimit: 1024, // or any positive number
-        };
+        // /** Optional. A limit on the size of each file that may be selected, in bytes.
+        // If specified, the user will only be able to select files with size
+        // less than or equal to this limit.
+        // For the purposes of this option, folders have size zero. */
+        // // sizeLimit: 1024, // or any positive number
+        // };
 
-        var button = Dropbox.createChooseButton(chooserOptions);
-        document.getElementById("wrapper").appendChild(button);
+        // var button = dbx.createChooseButton(chooserOptions);
+        // document.getElementById("wrapper").appendChild(button);
 
 
-        /** NOTES */
-        /** as of now there is no way to upload entire files with the saver component, this
-         * component is meant to upload individual files
-         * perhaps a work around could be to supply an option to the user to upload all files in a filder and pass in the array of files in that folder 
-         * the other option is to use the filesUpload method of the Dropbox API to upload the folder and its contents. You can do this by creating a FormData object that includes the folder and its contents, and then making a call to the filesUpload method */
+        // /** NOTES */
+        // /** as of now there is no way to upload entire files with the saver component, this
+        //  * component is meant to upload individual files
+        //  * perhaps a work around could be to supply an option to the user to upload all files in a filder and pass in the array of files in that folder 
+        //  * the other option is to use the filesUpload method of the Dropbox API to upload the folder and its contents. You can do this by creating a FormData object that includes the folder and its contents, and then making a call to the filesUpload method */
         
-         /** example */ 
-         /** // Initialize the Dropbox JavaScript SDK
-         const dbx = new Dropbox.Dropbox({ accessToken: 'ACCESS_TOKEN' });
+        //  /** example */ 
+        //  /** // Initialize the Dropbox JavaScript SDK
+        //  const dbx = new Dropbox.Dropbox({ accessToken: 'ACCESS_TOKEN' });
 
-            // Create a FormData object that includes the folder and its contents
-            var formData = new FormData();
-            formData.append('file', folderBlob, 'FOLDER_NAME');
+        //     // Create a FormData object that includes the folder and its contents
+        //     var formData = new FormData();
+        //     formData.append('file', folderBlob, 'FOLDER_NAME');
 
-            // Upload the folder to Dropbox
-            dbx.filesUpload({ path: '/FOLDER_NAME', mode: 'add', autorename: true, mute: false, contents: formData })
-                .then(function(response) {
-                    console.log(response);
-                })
-                .catch(function(error) {
-                    console.error(error);
-        }); */
+        //     // Upload the folder to Dropbox
+        //     dbx.filesUpload({ path: '/FOLDER_NAME', mode: 'add', autorename: true, mute: false, contents: formData })
+        //         .then(function(response) {
+        //             console.log(response);
+        //         })
+        //         .catch(function(error) {
+        //             console.error(error);
+        // }); */
 
-        /** options for including javascript dropbox sdk in our project */
+        // /** options for including javascript dropbox sdk in our project */
 
-        /** 1. Using a Content Delivery Network (CDN): You can use a CDN like jsDelivr or unpkg to include the Dropbox JavaScript SDK in your project. This involves adding a script tag to your HTML file that points to the CDN's URL for the SDK as I have done here in a script tag*/
+        // /** 1. Using a Content Delivery Network (CDN): You can use a CDN like jsDelivr or unpkg to include the Dropbox JavaScript SDK in your project. This involves adding a script tag to your HTML file that points to the CDN's URL for the SDK as I have done here in a script tag*/
 
-        /** 2. Downloading the SDK: You can also download the Dropbox JavaScript SDK and include it in your project's file structure. You can download the SDK from the Dropbox Developer website. */
+        // /** 2. Downloading the SDK: You can also download the Dropbox JavaScript SDK and include it in your project's file structure. You can download the SDK from the Dropbox Developer website. */
 
-        /** 3. Using a package manager: If you're using a package manager like npm or yarn, you can install the Dropbox JavaScript SDK as a dependency. For example, you can use the following command to install the SDK using npm: npm install dropbox@4.0.31*/
+        // /** 3. Using a package manager: If you're using a package manager like npm or yarn, you can install the Dropbox JavaScript SDK as a dependency. For example, you can use the following command to install the SDK using npm: npm install dropbox@4.0.31*/
+
+
+
+        // /** To Do Friday: */
+        // /** install as a dependenciy through npm *
+        //  * initialize dbx vairatble and see if can still play with everything through the dbx variable
+        //  * /
 
       </script>
 
